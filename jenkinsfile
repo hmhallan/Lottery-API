@@ -4,6 +4,17 @@ node {
 
     }
     stage('Build'){
-        sh "./gradlew build"
+        parallel(
+	   	"Analise de código":{
+			withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SENHA_SONAR')]) {
+		    		sh "./gradlew -DSonar.login=${SONAR_TOKEN} sonarqube"
+			}
+		},
+		"Build":{
+			sh "./gradlew build"
+		}
+        )
+        
     }
+    
 }
