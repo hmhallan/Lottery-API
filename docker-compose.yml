@@ -1,0 +1,6 @@
+lottery-app:
+  image: lottery-app
+  container_name: dev_lottery-app
+  environment:
+    VIRTUAL_HOST: azeitado.workshop.com
+    VIRTUAL_PORT: 8080
